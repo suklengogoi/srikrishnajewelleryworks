@@ -1,4 +1,13 @@
 <!doctype html>
+<!--
+  Sri Krishna Jewellery Works, Barpeta Road
+  Collections page
+
+  Plain HTML, CSS and JavaScript. Upload the folder as it is; there is nothing to build.
+  Catalogue: js/pieces.js    Styles: css/style.css    Behaviour: js/site.js
+  Phone, WhatsApp, email and hours: the Visit section near the end of index.html,
+  and the business details block at the end of the head on both pages.
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -9,6 +18,7 @@
 <meta name="theme-color" content="#800000">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- how the link looks when it is shared on WhatsApp, Facebook and others -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sri Krishna Jewellery Works">
 <meta property="og:title" content="Collections | Sri Krishna Jewellery Works">
@@ -17,15 +27,19 @@
 <meta property="og:image" content="https://skjw.in/assets/share.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
+<!-- fonts: Marcellus for headings, Newsreader for text, Noto Serif Bengali for the Assamese line -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&family=Noto+Serif+Bengali:wght@400;500&display=swap">
-<link rel="preload" as="image" href="assets/logo-round.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/logo-wide.webp" type="image/webp">
 <link rel="stylesheet" href="css/style.css">
+<!-- first visit shows the opening logo; every other page load gets a short wipe -->
 <script>(function(d){var r=d.documentElement,first=false;r.classList.add('js');try{first=!sessionStorage.getItem('skjw-seen');sessionStorage.setItem('skjw-seen','1')}catch(e){}r.classList.add(first&&false?'intro':'quick');setTimeout(function(){r.classList.add('is-ready')},4000)})(document);</script>
+<!-- business details for Google search: address, phone, hours. Keep in step with the Visit section -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "JewelryStore", "name": "Sri Krishna Jewellery Works", "url": "https://skjw.in/", "image": "https://skjw.in/assets/share.jpg", "logo": "https://skjw.in/assets/logo-gold.svg", "telephone": "+91 94352 06027", "email": "amitroykarmakar@yahoo.com", "address": {"@type": "PostalAddress", "streetAddress": "W/No. 6, Kalibari Road", "addressLocality": "Barpeta Road", "addressRegion": "Assam", "postalCode": "781315", "addressCountry": "IN"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "09:00", "closes": "21:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "14:00"}], "sameAs": ["https://www.instagram.com/srikrishnajewelleryworks/", "https://www.facebook.com/srikrishnajewellerywork/"]}</script>
 </head>
 <body>
+<!-- icons, drawn once and reused anywhere with <use href="#i-name"> -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
   <symbol id="i-whatsapp" viewBox="0 0 256 256"><path d="M186.68,146.63l-32-16a6,6,0,0,0-6,.38L133,141.46A42.49,42.49,0,0,1,114.54,123L125,107.33a6,6,0,0,0,.38-6l-16-32A6,6,0,0,0,104,66a38,38,0,0,0-38,38,86.1,86.1,0,0,0,86,86,38,38,0,0,0,38-38A6,6,0,0,0,186.68,146.63ZM152,178a74.09,74.09,0,0,1-74-74,26,26,0,0,1,22.42-25.75l12.66,25.32-10.39,15.58a6,6,0,0,0-.54,5.63,54.43,54.43,0,0,0,29.07,29.07,6,6,0,0,0,5.63-.54l15.58-10.39,25.32,12.66A26,26,0,0,1,152,178ZM128,26A102,102,0,0,0,38.35,176.69L26.73,211.56a14,14,0,0,0,17.71,17.71l34.87-11.62A102,102,0,1,0,128,26Zm0,192a90,90,0,0,1-45.06-12.08,6.09,6.09,0,0,0-3-.81,6.2,6.2,0,0,0-1.9.31L40.65,217.88a2,2,0,0,1-2.53-2.53L50.58,178a6,6,0,0,0-.5-4.91A90,90,0,1,1,128,218Z"></path></symbol>
   <symbol id="i-phone" viewBox="0 0 256 256"><path d="M221.59,160.3l-47.24-21.17a14,14,0,0,0-13.28,1.22,4.81,4.81,0,0,0-.56.42l-24.69,21a1.88,1.88,0,0,1-1.68.06c-15.87-7.66-32.31-24-40-39.65a1.91,1.91,0,0,1,0-1.68l21.07-25a6.13,6.13,0,0,0,.42-.58,14,14,0,0,0,1.12-13.27L95.73,34.49a14,14,0,0,0-14.56-8.38A54.24,54.24,0,0,0,34,80c0,78.3,63.7,142,142,142a54.25,54.25,0,0,0,53.89-47.17A14,14,0,0,0,221.59,160.3ZM176,210C104.32,210,46,151.68,46,80A42.23,42.23,0,0,1,82.67,38h.23a2,2,0,0,1,1.84,1.31l21.1,47.11a2,2,0,0,1,0,1.67L84.73,113.15a4.73,4.73,0,0,0-.43.57,14,14,0,0,0-.91,13.73c8.87,18.16,27.17,36.32,45.53,45.19a14,14,0,0,0,13.77-1c.19-.13.38-.27.56-.42l24.68-21a1.92,1.92,0,0,1,1.6-.1l47.25,21.17a2,2,0,0,1,1.21,2A42.24,42.24,0,0,1,176,210Z"></path></symbol>
@@ -35,8 +49,6 @@
   <symbol id="i-seal" viewBox="0 0 256 256"><path d="M224.42,104.2c-3.9-4.07-7.93-8.27-9.55-12.18-1.5-3.63-1.58-9-1.67-14.68-.14-9.38-.3-20-7.42-27.12S188,42.94,178.66,42.8c-5.68-.09-11-.17-14.68-1.67-3.91-1.62-8.11-5.65-12.18-9.55C145.16,25.22,137.64,18,128,18s-17.16,7.22-23.8,13.58c-4.07,3.9-8.27,7.93-12.18,9.55-3.63,1.5-9,1.58-14.68,1.67-9.38.14-20,.3-27.12,7.42S42.94,68,42.8,77.34c-.09,5.68-.17,11-1.67,14.68-1.62,3.91-5.65,8.11-9.55,12.18C25.22,110.84,18,118.36,18,128s7.22,17.16,13.58,23.8c3.9,4.07,7.93,8.27,9.55,12.18,1.5,3.63,1.58,9,1.67,14.68.14,9.38.3,20,7.42,27.12S68,213.06,77.34,213.2c5.68.09,11,.17,14.68,1.67,3.91,1.62,8.11,5.65,12.18,9.55C110.84,230.78,118.36,238,128,238s17.16-7.22,23.8-13.58c4.07-3.9,8.27-7.93,12.18-9.55,3.63-1.5,9-1.58,14.68-1.67,9.38-.14,20-.3,27.12-7.42s7.28-17.74,7.42-27.12c.09-5.68.17-11,1.67-14.68,1.62-3.91,5.65-8.11,9.55-12.18C230.78,145.16,238,137.64,238,128S230.78,110.84,224.42,104.2Zm-8.66,39.3c-4.67,4.86-9.5,9.9-12,15.9-2.38,5.74-2.48,12.52-2.58,19.08-.11,7.44-.23,15.14-3.9,18.82s-11.38,3.79-18.82,3.9c-6.56.1-13.34.2-19.08,2.58-6,2.48-11,7.31-15.91,12-5.25,5-10.68,10.24-15.49,10.24s-10.24-5.21-15.5-10.24c-4.86-4.67-9.9-9.5-15.9-12-5.74-2.38-12.52-2.48-19.08-2.58-7.44-.11-15.14-.23-18.82-3.9s-3.79-11.38-3.9-18.82c-.1-6.56-.2-13.34-2.58-19.08-2.48-6-7.31-11-12-15.91C35.21,138.24,30,132.81,30,128s5.21-10.24,10.24-15.5c4.67-4.86,9.5-9.9,12-15.9,2.38-5.74,2.48-12.52,2.58-19.08.11-7.44.23-15.14,3.9-18.82s11.38-3.79,18.82-3.9c6.56-.1,13.34-.2,19.08-2.58,6-2.48,11-7.31,15.91-12C117.76,35.21,123.19,30,128,30s10.24,5.21,15.5,10.24c4.86,4.67,9.9,9.5,15.9,12,5.74,2.38,12.52,2.48,19.08,2.58,7.44.11,15.14.23,18.82,3.9s3.79,11.38,3.9,18.82c.1,6.56.2,13.34,2.58,19.08,2.48,6,7.31,11,12,15.91,5,5.25,10.24,10.68,10.24,15.49S220.79,138.24,215.76,143.5ZM172.24,99.76a6,6,0,0,1,0,8.48l-56,56a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L112,151.51l51.76-51.75A6,6,0,0,1,172.24,99.76Z"></path></symbol>
   <symbol id="i-certificate" viewBox="0 0 256 256"><path d="M126,136a6,6,0,0,1-6,6H72a6,6,0,0,1,0-12h48A6,6,0,0,1,126,136Zm-6-38H72a6,6,0,0,0,0,12h48a6,6,0,0,0,0-12Zm110,62.62V224a6,6,0,0,1-9,5.21l-25-14.3-25,14.3a6,6,0,0,1-9-5.21V198H40a14,14,0,0,1-14-14V56A14,14,0,0,1,40,42H216a14,14,0,0,1,14,14V87.38a49.91,49.91,0,0,1,0,73.24ZM196,86a38,38,0,1,0,38,38A38,38,0,0,0,196,86ZM162,186V160.62a50,50,0,0,1,56-81.51V56a2,2,0,0,0-2-2H40a2,2,0,0,0-2,2V184a2,2,0,0,0,2,2Zm56-17.11a49.91,49.91,0,0,1-44,0v44.77l19-10.87a6,6,0,0,1,6,0l19,10.87Z"></path></symbol>
   <symbol id="i-fingerprint" viewBox="0 0 256 256"><path d="M70,128a132.68,132.68,0,0,1-14,59.58,6,6,0,0,1-5.38,3.33,6,6,0,0,1-5.36-8.67A120.74,120.74,0,0,0,58,128,69.72,69.72,0,0,1,84.25,73.36a6,6,0,0,1,7.51,9.37A57.73,57.73,0,0,0,70,128Zm58-6a6,6,0,0,0-6,6,186.07,186.07,0,0,1-23.23,90.07,6,6,0,0,0,10.5,5.82A198.14,198.14,0,0,0,134,128,6,6,0,0,0,128,122Zm0-32a38,38,0,0,0-38,38,6,6,0,0,0,12,0,26,26,0,0,1,52,0,216.06,216.06,0,0,1-20.71,92.85A6,6,0,1,0,144.16,226,227.94,227.94,0,0,0,166,128,38,38,0,0,0,128,90Zm0-64A102.11,102.11,0,0,0,26,128a90,90,0,0,1-5.12,30,6,6,0,1,0,11.31,4A101.83,101.83,0,0,0,38,128a90,90,0,0,1,180,0,284.7,284.7,0,0,1-5.33,54.84,6,6,0,0,0,4.72,7.05,6.8,6.8,0,0,0,1.17.11,6,6,0,0,0,5.88-4.84A295.92,295.92,0,0,0,230,128,102.12,102.12,0,0,0,128,26ZM94,154.13a6,6,0,0,0-7.07,4.69,152.82,152.82,0,0,1-17.44,46,6,6,0,0,0,10.4,6,164.77,164.77,0,0,0,18.8-49.65A6,6,0,0,0,94,154.13ZM128,58a70.76,70.76,0,0,0-8.75.54,6,6,0,1,0,1.49,11.91A58,58,0,0,1,186,128a252.27,252.27,0,0,1-1.94,31.26,6,6,0,0,0,5.21,6.69,6.59,6.59,0,0,0,.75,0,6,6,0,0,0,5.95-5.26A266.46,266.46,0,0,0,198,128,70.08,70.08,0,0,0,128,58ZM185.44,186.2a6,6,0,0,0-7.31,4.31c-1.47,5.74-3.18,11.49-5.06,17.09a6,6,0,0,0,11.38,3.82c2-5.88,3.75-11.9,5.3-17.92A6,6,0,0,0,185.44,186.2Z"></path></symbol>
-  <symbol id="i-copy" viewBox="0 0 256 256"><path d="M216,34H88a6,6,0,0,0-6,6V82H40a6,6,0,0,0-6,6V216a6,6,0,0,0,6,6H168a6,6,0,0,0,6-6V174h42a6,6,0,0,0,6-6V40A6,6,0,0,0,216,34ZM162,210H46V94H162Zm48-48H174V88a6,6,0,0,0-6-6H94V46H210Z"></path></symbol>
-  <symbol id="i-check" viewBox="0 0 256 256"><path d="M228.24,76.24l-128,128a6,6,0,0,1-8.48,0l-56-56a6,6,0,0,1,8.48-8.48L96,191.51,219.76,67.76a6,6,0,0,1,8.48,8.48Z"></path></symbol>
   <symbol id="i-menu" viewBox="0 0 256 256"><path d="M222,128a6,6,0,0,1-6,6H40a6,6,0,0,1,0-12H216A6,6,0,0,1,222,128ZM40,70H216a6,6,0,0,0,0-12H40a6,6,0,0,0,0,12ZM216,186H40a6,6,0,0,0,0,12H216a6,6,0,0,0,0-12Z"></path></symbol>
   <symbol id="i-close" viewBox="0 0 256 256"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"></path></symbol>
   <symbol id="i-play" viewBox="0 0 256 256"><path d="M231.36,116.19,87.28,28.06a14,14,0,0,0-14.18-.27A13.69,13.69,0,0,0,66,39.87V216.13a13.69,13.69,0,0,0,7.1,12.08,14,14,0,0,0,14.18-.27l144.08-88.13a13.82,13.82,0,0,0,0-23.62Zm-6.26,13.38L81,217.7a2,2,0,0,1-2.06,0,1.78,1.78,0,0,1-1-1.61V39.87a1.78,1.78,0,0,1,1-1.61A2.06,2.06,0,0,1,80,38a2,2,0,0,1,1,.31L225.1,126.43a1.82,1.82,0,0,1,0,3.14Z"></path></symbol>
@@ -46,12 +58,13 @@
 </defs></svg>
 
 <div class="site" id="top">
-<div class="curtain" aria-hidden="true"><img src="assets/logo-round.svg" alt="" width="300" height="300"></div>
+<!-- opening logo (first visit) and the wipe between pages -->
+<div class="curtain" aria-hidden="true"><img src="assets/logo-wide.webp" alt="" width="938" height="180"></div>
 <div class="wipe" aria-hidden="true"></div>
+<!-- top bar. On phones the links fold into the menu below -->
 <header class="nav">
   <a class="brand" href="index.html" aria-label="Sri Krishna Jewellery Works, home">
-    <img src="assets/logo-round.svg" alt="" width="56" height="56">
-    <span class="brand-name">Sri Krishna Jewellery Works</span>
+    <img class="brand-logo" src="assets/logo-wide.webp" alt="" width="938" height="180">
   </a>
   <nav class="nav-links" aria-label="Main">
     <a href="collections.html" aria-current="page">Collections</a>
@@ -62,6 +75,7 @@
   <a class="nav-cta" href="https://wa.me/917002180879?text=Hello%2C%20I%20saw%20your%20website%20and%20would%20like%20to%20ask%20about%20a%20piece." target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-whatsapp"/></svg>Enquire</a>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><svg viewBox="0 0 256 256" aria-hidden="true"><use href="#i-menu"/></svg></button>
 </header>
+<!-- full-screen menu for phones and small tablets -->
 <div class="menu" id="menu">
   <a href="collections.html"><span>Collections</span></a>
   <a href="index.html#bridal"><span>Bridal</span></a>
@@ -75,15 +89,18 @@
   <h1 class="display h-page"><span class="ln"><span class="foil">The collections</span></span></h1>
   <p class="lede fade">Open any piece to look closer, then ask us about it on WhatsApp. There is more at the counter than we can show here.</p>
 </header>
+<!-- the filter buttons and the cards are drawn by js/collections.js from the list in js/pieces.js -->
 <div class="filters fade" id="filters" role="group" aria-label="Show one family of ornament"></div>
 <div class="grid" id="grid"></div>
 <noscript><p class="sec">The catalogue needs JavaScript. You can also <a class="link" href="https://wa.me/917002180879?text=Hello%2C%20I%20saw%20your%20website%20and%20would%20like%20to%20ask%20about%20a%20piece.">ask us on WhatsApp</a> what is in the showroom.</p></noscript>
+<!-- prices change with the gold rate, so they are shared on request -->
 <div class="note page-note">
   <p>Prices follow the day's gold rate, so we share them when you ask.</p>
   <a class="link" href="https://wa.me/917002180879?text=Hello%2C%20I%20would%20like%20to%20know%20today%27s%20price%20for%20a%20piece%20on%20your%20website." target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-whatsapp"/></svg>Ask for today's price</a>
 </div>
 </main>
 
+<!-- detail view: opens when a card is tapped, filled in by js/collections.js -->
 <dialog class="detail" id="detail" aria-labelledby="detail-title">
   <button type="button" class="detail-close"><svg viewBox="0 0 256 256" aria-hidden="true"><use href="#i-close"/></svg>Close</button>
   <div class="detail-in">
@@ -104,6 +121,8 @@
     </div>
   </div>
 </dialog>
+
+<!-- FOOTER -->
 <footer class="band foot">
   <img class="foot-logo" src="assets/logo-gold.svg" alt="Sri Krishna Jewellery Works" width="400" height="233" loading="lazy">
   <p class="as" lang="as">শ্ৰীকৃষ্ণ জুয়েলাৰী ওৱাৰ্কচ্</p>
@@ -113,6 +132,7 @@
   <p class="small">© 2026 Sri Krishna Jewellery Works</p>
 </footer>
 </div>
+<!-- scripts run after the page has been drawn -->
 <script src="js/pieces.js" defer></script>
 <script src="js/site.js" defer></script>
 <script src="js/collections.js" defer></script>

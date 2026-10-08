@@ -1,5 +1,5 @@
 /* The hero: a pair of twisted gold bangles drawn live with WebGL. No library.
-   If WebGL is not available the page shows the ring photo instead. */
+   If WebGL is not available the page shows a still of the same two bangles instead. */
 (function () {
   'use strict';
   var canvas = document.getElementById('bangle');
@@ -12,7 +12,7 @@
   }
 
   var gl = null;
-  try { gl = canvas.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: true }); } catch (e) {}
+  try { gl = canvas.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: true }) || canvas.getContext('experimental-webgl', { antialias: true, alpha: true, premultipliedAlpha: true }); } catch (e) {}
   if (!gl) { fallback(); return; }
 
   /* ----- shaders: polished gold reflecting a small studio of soft lights ----- */
@@ -46,6 +46,7 @@
     return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
   }
   var vs = shader(gl.VERTEX_SHADER, VS), fs = shader(gl.FRAGMENT_SHADER, FS);
+  if (!fs) fs = shader(gl.FRAGMENT_SHADER, FS.replace('precision highp float', 'precision mediump float'));   // older phones without high precision
   if (!vs || !fs) { fallback(); return; }
   var prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
   if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { fallback(); return; }

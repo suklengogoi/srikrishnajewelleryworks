@@ -9,7 +9,7 @@ A static site. No build step and no library. Upload the whole folder as it is.
 | `index.html` | Home page |
 | `collections.html` | Catalogue page |
 | `css/style.css` | All styles, in 16 numbered sections |
-| `js/site.js` | Menu, reveals, parallax, the collections slider, films, copy buttons, opening hours, page wipe |
+| `js/site.js` | Menu, reveals, parallax, the collections slider, films, opening hours, page wipe |
 | `js/bangle.js` | The 3D gold bangles in the hero |
 | `js/pieces.js` | The catalogue. **The only file you edit to add a piece.** |
 | `js/collections.js` | Draws the catalogue page from `pieces.js` |
@@ -27,7 +27,7 @@ A film is added the same way: `{ film: 'assets/x.mp4', img: 'assets/x-poster.web
 
 - WhatsApp number: `whatsapp` at the top of `js/pieces.js`, and search both HTML files for `wa.me/917002180879`.
 - Phone, email, address and hours: the Visit section in `index.html`, and the `application/ld+json` block in the head of both pages.
-- Closing times used by "Open now": block 8 in `js/site.js`.
+- Closing times used by "Open now": block 7 in `js/site.js`.
 
 ## Before it goes live
 

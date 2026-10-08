@@ -66,25 +66,34 @@
   var pars = $$('[data-par]').map(function (el) {
     return { el: el, k: parseFloat(el.getAttribute('data-par')), y: 0 };
   });
+  /* runs only while the page is moving, then rests, so an idle page costs nothing */
+  var ticking = false, solid = null, hidden = null;
   function frame() {
-    var y = window.scrollY || 0, vh = window.innerHeight;
+    var y = window.scrollY || 0, vh = window.innerHeight, busy = false;
     if (Math.abs(y - lastY) > 4) {
-      nav.classList.toggle('is-hidden', y > lastY && y > 260 && !menu.classList.contains('open'));
+      var h = y > lastY && y > 260 && !menu.classList.contains('open');
+      if (h !== hidden) { nav.classList.toggle('is-hidden', h); hidden = h; }
       lastY = y;
     }
-    nav.classList.toggle('is-solid', y > 40);
+    var s = y > 40;
+    if (s !== solid) { nav.classList.toggle('is-solid', s); solid = s; }
     if (!reduce) {
       for (var i = 0; i < pars.length; i++) {
         var p = pars[i], r = p.el.parentNode.getBoundingClientRect();
         if (r.bottom < -200 || r.top > vh + 200) continue;
-        var target = ((r.top + r.height / 2) - vh / 2) * -p.k;
-        p.y += (target - p.y) * 0.09;                       // ease toward the target
-        p.el.style.translate = '0 ' + p.y.toFixed(2) + 'px';
+        var target = ((r.top + r.height / 2) - vh / 2) * -p.k, gap = target - p.y;
+        if (Math.abs(gap) < 0.15) continue;                 // close enough: stop moving it
+        p.y += gap * 0.09;                                  // ease toward the target
+        p.el.style.translate = '0 ' + p.y.toFixed(1) + 'px';
+        busy = true;
       }
     }
-    requestAnimationFrame(frame);
+    if (busy) requestAnimationFrame(frame); else ticking = false;
   }
-  requestAnimationFrame(frame);
+  function kick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', kick);
+  kick();
 
   /* ---------- 5. Tray: arrows glide it one screen of tiles; drag and swipe also work ---------- */
   var rail = $('.rail');
@@ -170,8 +179,15 @@
     if (btn) btn.addEventListener('click', function () { wanted = v.paused; if (v.paused) play(v); else v.pause(); });
     v.addEventListener('play', label); v.addEventListener('pause', label);
     if ('IntersectionObserver' in window) {
+      /* start fetching a little before it arrives, so it is ready to play without a stutter */
+      var near = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        near.disconnect();
+        if (v.getAttribute('preload') === 'none') { v.preload = 'auto'; if (v.paused && v.readyState === 0) v.load(); }
+      }, { rootMargin: '600px 300px' });
+      near.observe(v);
       new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting && wanted) play(v); else if (!e.isIntersecting) v.pause(); });
+        es.forEach(function (e) { if (e.isIntersecting && wanted) play(v); else if (!e.isIntersecting && !v.paused) v.pause(); });
       }, { threshold: 0.2 }).observe(v);
     } else if (wanted) play(v);
     label();
@@ -189,24 +205,7 @@
     }
   }
 
-  /* ---------- 7. Copy buttons beside the phone numbers and email ---------- */
-  $$('[data-copy]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var src = document.getElementById(btn.getAttribute('data-copy')), lab = $('span', btn), old = lab.textContent;
-      var done = function () {
-        lab.textContent = 'Copied'; $('use', btn).setAttribute('href', '#i-check');
-        setTimeout(function () { lab.textContent = old; $('use', btn).setAttribute('href', '#i-copy'); }, 1600);
-      };
-      var select = function () {
-        var r = document.createRange(); r.selectNodeContents(src);
-        var s = getSelection(); s.removeAllRanges(); s.addRange(r); lab.textContent = 'Selected';
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(src.textContent.trim()).then(done, select);
-      else select();
-    });
-  });
-
-  /* ---------- 8. "Open now", worked out on Barpeta Road time whatever the visitor's clock says ---------- */
+  /* ---------- 7. "Open now", worked out on Barpeta Road time whatever the visitor's clock says ---------- */
   try {
     var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()), t = {};
     parts.forEach(function (p) { t[p.type] = p.value; });
@@ -225,7 +224,7 @@
     }
   } catch (e) { /* no time zone support: the hours are still listed */ }
 
-  /* ---------- 9. Page change: the dark wipe closes, then the next page opens with it ---------- */
+  /* ---------- 8. Page change: the dark wipe closes, then the next page opens with it ---------- */
   var wipe = $('.wipe');
   if (wipe && !reduce) {
     document.addEventListener('click', function (e) {
